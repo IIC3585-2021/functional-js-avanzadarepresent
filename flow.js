@@ -11,17 +11,17 @@ const anyWinner = (users) => (users.some((user) => user.score === 0));
 
 const exitGame = (values) => anyWinner([values.user]) ? (logWinner(values) && exit()) : values;
 
-const input = [[1, 1], [1, 1], [1, 1]];
+const getPlay = (plays) => plays.shift();
 
-const userTurn = ({ user, users, input }) => ({ user: inputThrow(user.username, user.score, input), users, input });
+const userTurn = ({ user, users, inputs }) => ({ user: inputThrow(user.username, user.score, getPlay(inputs)), users, inputs });
 
 const turnPipeline = utils.pipe(logTurn, userTurn, exitGame, logTurnResult);
 
-const playGame = function playGame (...names) {
+const playGame = function playGame (inputs,...names) {
   let users = initUsers(...names);
   while (!anyWinner(users)) {
-    users = users.map(user => turnPipeline({ user, users, input }).user);
+    users = users.map(user => turnPipeline({ user, users, inputs }).user);
   }
 };
 
-playGame('enzini', 'rihanuch', 'fgbruna');
+module.exports = { playGame }

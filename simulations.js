@@ -36,3 +36,5 @@ const simulation2 = [
     [[3, 4], [2, 16], [2, 12]],
     [[2, 5], [2, 6], [1, 12]]
 ]
+
+module.exports = { player1, player2, simulation1, simulation2 };
