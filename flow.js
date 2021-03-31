@@ -17,11 +17,11 @@ const userTurn = ({ user, users, inputs }) => ({ user: inputThrow(user.username,
 
 const turnPipeline = utils.pipe(logTurn, userTurn, exitGame, logTurnResult);
 
-const playGame = function playGame (inputs,...names) {
+const playGame = function playGame (inputs, ...names) {
   let users = initUsers(...names);
   while (!anyWinner(users)) {
     users = users.map(user => turnPipeline({ user, users, inputs }).user);
   }
 };
 
-module.exports = { playGame }
+module.exports = { playGame };
